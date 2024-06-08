@@ -196,3 +196,132 @@ In the code above, we see we are using this.state to add the variable studentsCo
 For reading the state, we are using this.state.studentsCount.
 
 For updating the state, we need to first bind the addStudent function to this. Only then, we will be able to use the setState function which is used to update the state. 
+
+
+#### 7. **What is the virtual DOM? How does react use the virtual DOM to render the UI?**
+**Answer:** As stated by the react team, virtual DOM is a concept where a virtual representation of the real DOM is kept inside the memory and is synced with the real DOM by a library such as ReactDOM.
+![Virtual Dom](virtual-dom.png)
+**Why was virtual DOM introduced?**
+DOM manipulation is an integral part of any web application, but DOM manipulation is quite slow when compared to other operations in JavaScript. The efficiency of the application gets affected when several DOM manipulations are being done. Most JavaScript frameworks update the entire DOM even when a small part of the DOM changes.
+
+For example, consider a list that is being rendered inside the DOM. If one of the items in the list changes, the entire list gets rendered again instead of just rendering the item that was changed/updated. This is called inefficient updating.
+
+To address the problem of inefficient updating, the react team introduced the concept of virtual DOM.
+**How does it work?**
+![Virtual Dom Working](virtual-dom-working.png)
+For every DOM object, there is a corresponding virtual DOM object(copy), which has the same properties. The main difference between the real DOM object and the virtual DOM object is that any changes in the virtual DOM object will not reflect on the screen directly. Consider a virtual DOM object as a blueprint of the real DOM object. Whenever a JSX element gets rendered, every virtual DOM object gets updated.
+> Note- One may think updating every virtual DOM object might be inefficient, but that’s not the case. Updating the virtual DOM is much faster than updating the real DOM since we are just updating the blueprint of the real DOM.
+React uses two virtual DOMs to render the user interface. One of them is used to store the current state of the objects and the other to store the previous state of the objects. Whenever the virtual DOM gets updated, react compares the two virtual DOMs and gets to know about which virtual DOM objects were updated. After knowing which objects were updated, react renders only those objects inside the real DOM instead of rendering the complete real DOM. This way, with the use of virtual DOM, react solves the problem of inefficient updating.
+
+#### 8. **What are the differences between controlled and uncontrolled components?**
+**Answer:** Controlled and uncontrolled components are just different approaches to handling input from elements in react.
+![Controlled And Uncontrolled Component](./controlled-uncontrolled-components.png)
+- **Controlled component:** In a controlled component, the value of the input element is controlled by React. We store the state of the input element inside the code, and by using event-based callbacks, any changes made to the input element will be reflected in the code as well.
+When a user enters data inside the input element of a controlled component, onChange function gets triggered and inside the code, we check whether the value entered is valid or invalid. If the value is valid, we change the state and re-render the input element with the new value.
+Example of a controlled component:
+```
+function FormValidation(props) {
+let [inputValue, setInputValue] = useState("");
+let updateInput = e => {
+  setInputValue(e.target.value);
+};
+return (
+  <div>
+    <form>
+      <input type="text" value={inputValue} onChange={updateInput} />
+    </form>
+  </div>
+);
+}
+```
+As one can see in the code above, the value of the input element is determined by the state of the inputValue variable. Any changes made to the input element is handled by the updateInput function.
+
+- **Uncontrolled component:** In an uncontrolled component, the value of the input element is handled by the DOM itself. Input elements inside uncontrolled components work just like normal HTML input form elements.
+The state of the input element is handled by the DOM. Whenever the value of the input element is changed, event-based callbacks are not called. Basically, react does not perform any action when there are changes made to the input element.
+
+Whenever use enters data inside the input field, the updated data is shown directly. To access the value of the input element, we can use ref.
+
+Example of an uncontrolled component:
+```
+function FormValidation(props) {
+let inputValue = React.createRef();
+let handleSubmit = e => {
+  alert(`Input value: ${inputValue.current.value}`);
+  e.preventDefault();
+};
+return (
+  <div>
+    <form onSubmit={handleSubmit}>
+      <input type="text" ref={inputValue} />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+);
+}
+```
+As one can see in the code above, we are not using onChange function to govern the changes made to the input element. Instead, we are using ref to access the value of the input element. 
+
+#### 9. **What are the different phases of the component lifecycle?**
+**Answer:** There are four different phases in the lifecycle of React component.
+They are:
+- **Initialization:** During this phase, React component will prepare by setting up the default props and initial state for the upcoming tough journey.
+- **Mounting:** Mounting refers to putting the elements into the browser DOM. Since React uses VirtualDOM, the entire browser DOM which has been currently rendered would not be refreshed. This phase includes the lifecycle methods componentWillMount and componentDidMount.
+- **Updating:** In this phase, a component will be updated when there is a change in the state or props of a component. This phase will have lifecycle methods like componentWillUpdate, shouldComponentUpdate, render, and componentDidUpdate.
+- **Unmounting:** In this last phase of the component lifecycle, the component will be removed from the DOM or will be unmounted from the browser DOM. This phase will have the lifecycle method named componentWillUnmount.
+![Lifecycle](./react-lifecycle.png)
+
+#### 10. **What are the lifecycle methods of React?**
+**Answer:** React lifecycle hooks will have the methods that will be automatically called at different phases in the component lifecycle and thus it provides good control over what happens at the invoked point. It provides the power to effectively control and manipulate what goes on throughout the component lifecycle.
+
+For example, if you are developing the YouTube application, then the application will make use of a network for buffering the videos and it consumes the power of the battery (assume only these two). After playing the video if the user switches to any other application, then you should make sure that the resources like network and battery are being used most efficiently. You can stop or pause the video buffering which in turn stops the battery and network usage when the user switches to another application after video play.
+
+So we can say that the developer will be able to produce a quality application with the help of lifecycle methods and it also helps developers to make sure to plan what and how to do it at different points of birth, growth, or death of user interfaces.
+
+The various lifecycle methods are:
+- **constructor():** This method will be called when the component is initiated before anything has been done. It helps to set up the initial state and initial values.
+- **getDerivedStateFromProps():** This method will be called just before element(s) rendering in the DOM. It helps to set up the state object depending on the initial props. The getDerivedStateFromProps() method will have a state as an argument and it returns an object that made changes to the state. This will be the first method to be called on an updating of a component.
+- **render():** This method will output or re-render the HTML to the DOM with new changes. The render() method is an essential method and will be called always while the remaining methods are optional and will be called only if they are defined.
+- **componentDidMount():** This method will be called after the rendering of the component. Using this method, you can run statements that need the component to be already kept in the DOM.
+- **shouldComponentUpdate():** The Boolean value will be returned by this method which will specify whether React should proceed further with the rendering or not. The default value for this method will be True.
+- **getSnapshotBeforeUpdate():** This method will provide access for the props as well as for the state before the update. It is possible to check the previously present value before the update, even after the update.
+- **componentDidUpdate():** This method will be called after the component has been updated in the DOM.
+- **componentWillUnmount():** This method will be called when the component removal from the DOM is about to happen.
+
+#### 11. **Explain about types of Hooks in React.**
+**Answer:** There are two types of Hooks in React. They are:
+**1. Built-in Hooks:** The built-in Hooks are divided into 2 parts as given below:
+- **Basic Hooks:**
+  - **useState():** This functional component is used to set and retrieve the state.
+  - **useEffect():** It enables for performing the side effects in the functional components.
+  - **useContext():** It is used for creating common data that is to be accessed by the components hierarchy without having to pass the props down to each level.
+- **Additional Hooks:**
+  - **useReducer():** It is used when there is a complex state logic that is having several sub-values or when the upcoming state is dependent on the previous state. It will also enable you to optimization of component performance that will trigger deeper updates as it is permitted to pass the dispatch down instead of callbacks.
+  - **useMemo():** This will be used for recomputing the memoized value when there is a change in one of the dependencies. This optimization will help for avoiding expensive calculations on each render.
+  - **useCallback():** This is useful while passing callbacks into the optimized child components and depends on the equality of reference for the prevention of unneeded renders.
+  - **useImperativeHandle():**  It will enable modifying the instance that will be passed with the ref object.
+  - **useDebugValue():** It is used for displaying a label for custom hooks in React DevTools.
+  - **useRef():** It will permit creating a reference to the DOM element directly within the functional component.
+  - **useLayoutEffect():** It is used for the reading layout from the DOM and re-rendering synchronously.
+
+**2. Custom Hooks:** A custom Hook is basically a function of JavaScript. The Custom Hook working is similar to a regular function. The “use” at the beginning of the Custom Hook Name is required for React to understand that this is a custom Hook and also it will describe that this specific function follows the rules of Hooks. Moreover, developing custom Hooks will enable you for extracting component logic from within reusable functions.
+![React Hooks](./react-hooks.png)
+
+#### 12. **Differentiate React Hooks vs Classes.**
+**Answer:**
+![Hooks And Classes](./hooks-and-classes.png)
+
+#### 13. **How does the performance of using Hooks will differ in comparison with the classes?**
+**Answer:**
+- React Hooks will avoid a lot of overheads such as the instance creation, binding of events, etc., that are present with classes.
+- Hooks in React will result in smaller component trees since they will be avoiding the nesting that exists in HOCs (Higher Order Components) and will render props which result in less amount of work to be done by React.
+
+
+#### 14. **What is React Router?**
+**Answer:** React Router refers to the standard library used for routing in React. It permits us for building a single-page web application in React with navigation without even refreshing the page when the user navigates. It also allows to change the browser URL and will keep the user interface in sync with the URL. React Router will make use of the component structure for calling the components, using which appropriate information can be shown. Since React is a component-based framework, it’s not necessary to include and use this package. Any other compatible routing library would also work with React.
+
+The major components of React Router are given below:
+- **BrowserRouter:** It is a router implementation that will make use of the HTML5 history API (pushState, popstate, and event replaceState) for keeping your UI to be in sync with the URL. It is the parent component useful in storing all other components.
+- **Routes:** It is a newer component that has been introduced in the React v6 and an upgrade of the component.
+- **Route:** It is considered to be a conditionally shown component and some UI will be rendered by this whenever there is a match between its path and the current URL.
+- **Link:** It is useful in creating links to various routes and implementing navigation all over the application. It works similarly to the anchor tag in HTML.
+
