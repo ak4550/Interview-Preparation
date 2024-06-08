@@ -24,7 +24,7 @@ The important features of React are:
 
 #### 4. **What are the limitations of React?**
 **Answer:** The few limitations of React are as given below:
-[!React List](./react-list.png)
+[!React List](react-list.png)
 Example of a list using key:
 ```
 const ids = [1,2,3,4,5];
@@ -110,7 +110,7 @@ class Card extends React.Component{
 
 - **Handling props**
 Let’s render the following component with props and analyse how functional and class components handle props:
-> \<Student Info name="Vivek" rollNumber="23" />\
+> &lt;Student Info name="Vivek" rollNumber="23" /&gt;
 In functional components, the handling of props is pretty straightforward. Any prop provided as an argument to a functional component can be directly used inside HTML elements:
 ```
 function StudentInfo(props){
