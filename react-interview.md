@@ -24,7 +24,7 @@ The important features of React are:
 
 #### 4. **What are the limitations of React?**
 **Answer:** The few limitations of React are as given below:
-[!React List](react-list.png)
+![React List](react-list.png)
 Example of a list using key:
 ```
 const ids = [1,2,3,4,5];
