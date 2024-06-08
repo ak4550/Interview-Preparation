@@ -111,6 +111,7 @@ class Card extends React.Component{
 - **Handling props**
 Let’s render the following component with props and analyse how functional and class components handle props:
 > &lt;Student Info name="Vivek" rollNumber="23" /&gt;
+
 In functional components, the handling of props is pretty straightforward. Any prop provided as an argument to a functional component can be directly used inside HTML elements:
 ```
 function StudentInfo(props){
