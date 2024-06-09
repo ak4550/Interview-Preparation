@@ -24,7 +24,7 @@ The important features of React are:
 
 #### 4. **What are the limitations of React?**
 **Answer:** The few limitations of React are as given below:
-![React List](react-list.png)
+![React List](./images/react-list.png)
 Example of a list using key:
 ```
 const ids = [1,2,3,4,5];
@@ -200,7 +200,7 @@ For updating the state, we need to first bind the addStudent function to this. O
 
 #### 7. **What is the virtual DOM? How does react use the virtual DOM to render the UI?**
 **Answer:** As stated by the react team, virtual DOM is a concept where a virtual representation of the real DOM is kept inside the memory and is synced with the real DOM by a library such as ReactDOM.
-![Virtual Dom](virtual-dom.png)
+![Virtual Dom](./images/virtual-dom.png)
 **Why was virtual DOM introduced?**
 DOM manipulation is an integral part of any web application, but DOM manipulation is quite slow when compared to other operations in JavaScript. The efficiency of the application gets affected when several DOM manipulations are being done. Most JavaScript frameworks update the entire DOM even when a small part of the DOM changes.
 
@@ -208,14 +208,14 @@ For example, consider a list that is being rendered inside the DOM. If one of th
 
 To address the problem of inefficient updating, the react team introduced the concept of virtual DOM.
 **How does it work?**
-![Virtual Dom Working](virtual-dom-working.png)
+![Virtual Dom Working](./images/virtual-dom-working.png)
 For every DOM object, there is a corresponding virtual DOM object(copy), which has the same properties. The main difference between the real DOM object and the virtual DOM object is that any changes in the virtual DOM object will not reflect on the screen directly. Consider a virtual DOM object as a blueprint of the real DOM object. Whenever a JSX element gets rendered, every virtual DOM object gets updated.
 > Note- One may think updating every virtual DOM object might be inefficient, but that’s not the case. Updating the virtual DOM is much faster than updating the real DOM since we are just updating the blueprint of the real DOM.
 React uses two virtual DOMs to render the user interface. One of them is used to store the current state of the objects and the other to store the previous state of the objects. Whenever the virtual DOM gets updated, react compares the two virtual DOMs and gets to know about which virtual DOM objects were updated. After knowing which objects were updated, react renders only those objects inside the real DOM instead of rendering the complete real DOM. This way, with the use of virtual DOM, react solves the problem of inefficient updating.
 
 #### 8. **What are the differences between controlled and uncontrolled components?**
 **Answer:** Controlled and uncontrolled components are just different approaches to handling input from elements in react.
-![Controlled And Uncontrolled Component](./controlled-uncontrolled-components.png)
+![Controlled And Uncontrolled Component](./images/controlled-uncontrolled-components.png)
 - **Controlled component:** In a controlled component, the value of the input element is controlled by React. We store the state of the input element inside the code, and by using event-based callbacks, any changes made to the input element will be reflected in the code as well.
 When a user enters data inside the input element of a controlled component, onChange function gets triggered and inside the code, we check whether the value entered is valid or invalid. If the value is valid, we change the state and re-render the input element with the new value.
 Example of a controlled component:
@@ -268,7 +268,7 @@ They are:
 - **Mounting:** Mounting refers to putting the elements into the browser DOM. Since React uses VirtualDOM, the entire browser DOM which has been currently rendered would not be refreshed. This phase includes the lifecycle methods componentWillMount and componentDidMount.
 - **Updating:** In this phase, a component will be updated when there is a change in the state or props of a component. This phase will have lifecycle methods like componentWillUpdate, shouldComponentUpdate, render, and componentDidUpdate.
 - **Unmounting:** In this last phase of the component lifecycle, the component will be removed from the DOM or will be unmounted from the browser DOM. This phase will have the lifecycle method named componentWillUnmount.
-![Lifecycle](./react-lifecycle.png)
+![Lifecycle](./images/react-lifecycle.png)
 
 #### 10. **What are the lifecycle methods of React?**
 **Answer:** React lifecycle hooks will have the methods that will be automatically called at different phases in the component lifecycle and thus it provides good control over what happens at the invoked point. It provides the power to effectively control and manipulate what goes on throughout the component lifecycle.
@@ -304,11 +304,11 @@ The various lifecycle methods are:
   - **useLayoutEffect():** It is used for the reading layout from the DOM and re-rendering synchronously.
 
 **2. Custom Hooks:** A custom Hook is basically a function of JavaScript. The Custom Hook working is similar to a regular function. The “use” at the beginning of the Custom Hook Name is required for React to understand that this is a custom Hook and also it will describe that this specific function follows the rules of Hooks. Moreover, developing custom Hooks will enable you for extracting component logic from within reusable functions.
-![React Hooks](./react-hooks.png)
+![React Hooks](./images/react-hooks.png)
 
 #### 12. **Differentiate React Hooks vs Classes.**
 **Answer:**
-![Hooks And Classes](./hooks-and-classes.png)
+![Hooks And Classes](./images/hooks-and-classes.png)
 
 #### 13. **How does the performance of using Hooks will differ in comparison with the classes?**
 **Answer:**
